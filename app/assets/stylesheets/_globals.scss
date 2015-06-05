@@ -1,0 +1,53 @@
+// Google Fonts
+@import url(http://fonts.googleapis.com/css?family=Noticia+Text);
+
+// Color Variables
+$primary-color: chocolate;
+$secondary-color: green;
+$gray: #888;
+
+
+// Font variables
+$noticia: 'Noticia Text', serif;
+
+// Brand logo
+.navbar-brand {
+  span {
+    margin: 0 -2px;
+  }
+  font-family: $noticia;
+}
+.brand-my {
+  color: $primary-color;
+}
+.brand-thought, .brand-record {
+  color: $secondary-color;
+}
+
+// Navbar
+
+.navbar {
+  background-color: #fff;
+  -webkit-box-shadow: 0 8px 6px -6px #999;
+  -moz-box-shadow: 0 8px 6px -6px #999;
+  box-shadow: 0 8px 6px -6px #999;
+}
+.icon-bar {
+  background-color: $gray;
+}
+.navbar-toggle {
+  border-color: #ddd;
+}
+.register-btn {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+#signinform {
+  padding-right: 3px;
+}
+
+// Main div
+
+#main {
+  margin-top: 30px;
+}

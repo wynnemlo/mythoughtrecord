@@ -1,0 +1,15 @@
+// Jumbotron
+
+.jumbotron {
+  background-image: image-url("jumbotron2.jpg");
+  margin-top: -30px;
+
+  h1, p {
+    color: #fff;
+  }
+  .jumbotron-text {
+    background-color: rgba(0,0,0,0.4);
+    padding: 30px
+  }
+}
+
