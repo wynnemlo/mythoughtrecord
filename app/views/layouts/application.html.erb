@@ -28,19 +28,23 @@
   </header>
 
   <div id="main" role="main">
-
-    <% if current_page?(root_url) %>
+    <% if !user_signed_in? && current_page?(root_path) %>
       <%= render 'layouts/jumbotron' %>
     <% end %>
 
-    <div class="container">
-      <%= render 'layouts/messages' %>
-      <%= yield %>
-      <hr>
-      <footer>
-        <p>&copy; mythoughtrecord 2015</p>
-      </footer>
-    </div> <!-- /container -->
+    <% if user_signed_in? && current_page?(root_path) %>
+      <div class="container-fluid content-main">
+    <% else %>
+      <div class="container content-main">
+    <% end %>
+        <%= render 'layouts/messages' %>
+        <%= yield %>
+        <div class="clearfix"></div>
+        <hr>
+        <footer>
+          <p>&copy; mythoughtrecord 2015</p>
+        </footer>
+      </div> <!-- /container -->
 
 </body>
 </html>

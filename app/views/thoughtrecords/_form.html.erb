@@ -1,0 +1,68 @@
+<%= form_for @thoughtrecord, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= render 'shared/error_messages', obj: @thoughtrecord %>
+  <% if !@thoughtrecord.new_record? %>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Date / Time:</label>
+      <div class="col-sm-10">
+        <input class="form-control" id="disabledInput" type="text" placeholder="<%= easy_datetime(@thoughtrecord.created_at) %>" disabled>
+      </div>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :situation, class: 'col-sm-2 control-label', 'aria-describedby' => 'situation_help' %>
+    <div class="col-sm-10"><%= f.text_area :situation, class: 'form-control' %></div>
+    <div class="col-sm-4 col-sm-offset-2" id="situation_help" class="help-block">
+      What happened? Where? When? Who with? How?
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :feelings, class: 'col-sm-2 control-label', 'aria-describedby' => 'feelings_help' do %>Feelings/Body sensations (Rate 0 - 100%)<% end %>
+    <div class="col-sm-10"><%= f.text_area :feelings, class: 'form-control' %></div>
+    <div class="col-sm-10 col-sm-offset-2" id="feelings_help" class="help-block">
+      What emotion did I feel at that time? What else? How intense was it? What did I notice in my body? Where did I feel it?
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :unhelpfulthoughts, class: 'col-sm-2 control-label', 'aria-describedby' => 'unhelpfulthoughts_help' do %>Unhelpful Thoughts / Images<% end %>
+    <div class="col-sm-10"><%= f.text_area :unhelpfulthoughts, class: 'form-control' %></div>
+    <div class="col-sm-10 col-sm-offset-2" id="unhelpfulthoughts_help" class="help-block">
+      What went through my mind? What disturbed me? What did those houghts/images/memories mean to me, or say about me or the situation?<br>
+      What am I responding to? What ‘button’ is this pressing for me? What would be the worst thing about that, or that could happen?
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :supportingfacts, class: 'col-sm-2 control-label', 'aria-describedby' => 'supportingfacts_help' do %>Facts that support the unhelpful thought<% end %>
+    <div class="col-sm-10"><%= f.text_area :supportingfacts, class: 'form-control' %></div>
+    <div class="col-sm-10 col-sm-offset-2" id="supportingfacts_help" class="help-block">
+      What are the facts? What facts do I have that the unhelpful thoughts are totally true?
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :disprovingfacts, class: 'col-sm-2 control-label', 'aria-describedby' => 'disprovingfacts_help' do %>Facts that provide evidence against the unhelpful thought<% end %>
+    <div class="col-sm-10"><%= f.text_area :disprovingfacts, class: 'form-control' %></div>
+    <div class="col-sm-10 col-sm-offset-2" id="disprovingfacts_help" class="help-block">
+      What facts do I have that the unhelpful thought/s are NOT totally true? Is it possible that this is opinion, rather than fact? What have others said about this?
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :altperspective, class: 'col-sm-2 control-label', 'aria-describedby' => 'altperspective_help' do %>Alternative, more realistic and balanced perspective<% end %>
+    <div class="col-sm-10"><%= f.text_area :altperspective, class: 'form-control' %></div>
+    <div class="col-sm-10 col-sm-offset-2" id="altperspective_help" class="help-block">
+      <p>STOPP! Take a breath... </p>
+      <p>What would someone else say about this situation? What’s the bigger picture? Is there another way of seeing it? What advice would I give someone else? Is my reaction in proportion to the actual event? Is this really as important as it seems?</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :outcome, class: 'col-sm-2 control-label', 'aria-describedby' => 'outcome_help' do %>Outcome - Re-rate emotion<% end %>
+    <div class="col-sm-10"><%= f.text_area :outcome, class: 'form-control' %></div>
+    <div class="col-sm-10 col-sm-offset-2" id="outcome_help" class="help-block">
+      What am I feeling now? (0-100%) What could I do differently? What would be more effective? Do what works! Act wisely. What will be most helpful for me or the situation? What will the consequences be?
+    </div>
+  </div>
+  <%= f.submit(@thoughtrecord.new_record? ? "Add new record" : "Update record", class: 'btn btn-primary col-sm-offset-2') %>
+  <% if !@thoughtrecord.new_record? %>
+    <%= link_to thoughtrecord_path(@thoughtrecord), method: 'delete', class: 'pull-right btn btn-danger', data: { confirm: "Are you sure you want to delete this record?" }  do %>
+      Delete this record
+    <% end %>
+  <% end %>
+<% end %>

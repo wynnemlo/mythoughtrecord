@@ -1,0 +1,59 @@
+<% if user_signed_in? %>
+  <% if @thoughtrecords.blank? %>
+    <h4>You have no thought records. <%= link_to "Create your first one now!", new_thoughtrecord_path %></h5>
+  <% else %>
+    <div role="tabpanel">
+
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="<%= 'active' if params[:tab].nil? %>">
+          <%= link_to "Row View", root_path %>
+        </li>
+        <li role="presentation" class="<%= 'active' if params[:tab] == 'column' %>">
+          <%= link_to "Column View", root_path(tab: 'column') %>
+        </li>
+      </ul>
+
+      <!-- Tab panes -->
+      
+      <div class="tab-content">
+        <% if params[:tab].nil? %>
+          <div role="tabpanel" class="tab-pane fade <%= 'in active' if params[:tab].nil? %>" id="rowview">
+            <%= render @thoughtrecords, format: 'row' %>
+          </div>
+        <% elsif params[:tab] == 'column' %>
+          <div role="tabpanel" class="tab-pane fade <%= 'in active' if params[:tab] == 'column' %>" id="columnview">
+              <table class="table table-responsive table-striped thoughtrecord_table">
+                <tr>
+                  <td>Date/Time:</td>
+                  <td>Situation:</td>
+                  <td>Feelings:</td>
+                  <td>Unhelpful Thoughts:</td>
+                  <td>Supporting Facts:</td>
+                  <td>Disproving Facts:</td>
+                  <td>Alternative Perspective:</td>
+                  <td>Outcome:</td>
+                </tr>
+                <%= render @thoughtrecords, format: 'column' %>
+              </table>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+<nav>
+  <ul class="pagination">
+    <% @pages.times do |n| %>
+      <% if (params[:offset].nil? && n == 0) || params[:offset].to_s == (n * Thoughtrecord::PER_PAGE).to_s %>
+        <li class="active"><%= link_to "#{n+1}", "#" %></li>
+      <% else %>
+        <li><%= link_to "#{n+1}", root_path(offset: n * Thoughtrecord::PER_PAGE, tab: params[:tab]) %></li>
+      <% end %>
+    <% end %>
+  </ul>
+</nav>
+
+<% else %>
+  <%= render 'static/index.html.erb' %>
+<% end %>

@@ -1,13 +1,21 @@
 Rails.application.routes.draw do
-  root 'static#index'
+  
+  # devise
+  devise_ios_rails_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
+  devise_scope :user do
+    post 'auth/facebook', to: 'devise_ios_rails/oauth#facebook'
+  end
+
+  # static pages
+  root to: 'thoughtrecords#index'
   get '/about', to: 'static#about'
+  get '/contact', to: 'static#contact'
 
-  # Login/Logout
-  get '/login', to: 'sessions#new'
-  post '/login', to: 'sessions#create'
-  get '/logout', to: 'sessions#destroy'
+  resources :thoughtrecords, except: [:show, :index]
 
-  get '/register', to: 'users#new'
-  resources :users, except: [:new]
+  namespace :api, constraints: { subdomain: 'api' } do
+    resources :thoughtrecords, except: [:new, :edit]
+  end
 
 end

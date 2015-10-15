@@ -10,6 +10,19 @@ $gray: #888;
 // Font variables
 $noticia: 'Noticia Text', serif;
 
+// Image variables
+$bg-image: image-url("hammock.jpg");
+
+// Fix firefox tables
+@-moz-document url-prefix() {
+  fieldset { display: table-cell; }
+}
+
+// Body
+//body {
+//  background-image: $bg-image;
+//}
+
 // Brand logo
 .navbar-brand {
   span {
@@ -25,18 +38,20 @@ $noticia: 'Noticia Text', serif;
 }
 
 // Navbar
-
-.navbar {
-  background-color: #fff;
-  -webkit-box-shadow: 0 8px 6px -6px #999;
-  -moz-box-shadow: 0 8px 6px -6px #999;
-  box-shadow: 0 8px 6px -6px #999;
-}
-.icon-bar {
-  background-color: $gray;
-}
-.navbar-toggle {
-  border-color: #ddd;
+header {
+  .navbar {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+  //  -webkit-box-shadow: 0 8px 6px -6px #999;
+  //  -moz-box-shadow: 0 8px 6px -6px #999;
+  //  box-shadow: 0 8px 6px -6px #999;
+  }
+  .icon-bar {
+    background-color: $gray;
+  }
+  .navbar-toggle {
+    border-color: #ddd;
+  }
 }
 .register-btn {
   margin-top: 8px;
@@ -50,4 +65,8 @@ $noticia: 'Noticia Text', serif;
 
 #main {
   margin-top: 30px;
+}
+
+.content-main {
+  background-color: rgba(255,255,255,0.6);
 }

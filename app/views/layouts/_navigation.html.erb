@@ -5,32 +5,45 @@
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
   </button>
-  <%= link_to(root_path, class: "navbar-brand") do %>
+    <%= link_to(root_path, class: "navbar-brand") do %>
       <span class="brand-my">my</span>
       <span class="brand-thought">thought</span>
       <span class="brand-record">record</span>
-  <% end %>
+    <% end %>
 </div>
 <div id="navbar" class="navbar-collapse collapse">
   <ul class="nav navbar-nav">
     <li><%= link_to "About", about_path %></li>
-    <li><%= link_to "FAQ", '#' %></li>
-    <li><%= link_to "Contact", '#' %></li>
+    <li><%= link_to "Contact", contact_path %></li>
   </ul>
 
-  <!-- sign in form -->
-  <%= form_tag '/login', :class => 'navbar-form navbar-right', :id => 'signinform' do %>
-    <div class="form-group">
-      <%= text_field_tag :username, params[:username] || '', class: 'form-control', 'placeholder' => 'Email' %>
+  <% if user_signed_in? %>
+    <div class="navbar-right navbar-form">
+        <%= link_to(new_thoughtrecord_path, class: 'btn btn-default') do %>
+          Add a new record
+        <% end %>
+        <%= link_to(root_path, class: 'btn btn-default') do %>
+          View records
+        <% end %>
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <%= current_user.email %> <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="user_dropdown">
+          <li role='presentation'><%= link_to(edit_user_registration_path, role: 'menuitem') do %>Account settings<% end %></li>
+          <li role='presentation'><%= link_to(destroy_user_session_path, role: 'menuitem', method: 'delete') do %>Log Out<% end %></li>
+        </ul>
+      </div>
     </div>
-    <div class="form-group">
-      <%= password_field_tag :password, params[:password] || '', class: 'form-control', 'placeholder' => 'Password' %>
+  <% else %>
+    <div class="navbar-right navbar-form">
+      <%= link_to(new_user_session_path, class: 'btn btn-default') do %>
+        Sign In
+      <% end %>
+      <%= link_to(new_user_registration_path, class: 'btn btn-default') do %>
+        Register
+      <% end %>
     </div>
-    <%= submit_tag "Sign in", class: 'btn btn-success' %>
-    <%= link_to(register_path, class: 'btn btn-primary') do %>
-      Register
-    <% end %>
   <% end %>
-
 
 </div><!--/.navbar-collapse -->
